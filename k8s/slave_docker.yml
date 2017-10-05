@@ -1,0 +1,13 @@
+name: sample
+root: /tmp
+
+windows:
+  - compose:
+      layout: main-horizontal
+      panes:
+        -
+          - "docker exec -ti {{ env_id }} /bin/sh"
+        -
+          - "docker exec -ti {{ env_id }} /bin/sh"
+          - "ssh -i /tmp/kubespray1_{{ env_id }}  ubuntu@`cat /tmp/{{ env_id }} | jq -r '.apocng_ec2.instances[].public_ip' | head -n1`"
+
