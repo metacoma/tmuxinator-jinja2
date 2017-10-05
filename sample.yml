@@ -1,0 +1,14 @@
+name: sample
+root: /tmp
+
+windows:
+  - compose:
+      panes:
+        - "while [ : ]; do ssh -t {{ server }} top; sleep 5; done"
+        - "while [ : ]; do ssh {{ server }}; sleep 5; done"
+  - motd:
+      layout: main-horizontal
+      panes:
+        - "while [ : ]; do ssh {{ server }}; sleep 5; done"
+        - "while [ : ]; do ssh -t {{ server }} cat /etc/hosts; read; sleep 5; done"
+
