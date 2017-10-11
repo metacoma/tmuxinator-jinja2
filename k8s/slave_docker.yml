@@ -1,13 +1,27 @@
-name: sample
+name: {{ env_id }}
 root: /tmp
 
 windows:
-  - compose:
+  - playbook:
       layout: main-horizontal
       panes:
         -
           - "docker exec -ti {{ env_id }} /bin/sh"
         -
           - "docker exec -ti {{ env_id }} /bin/sh"
+          - "apk update && apk add jq"
+          - "ssh -i /tmp/kubespray1_{{ env_id }}  ubuntu@`cat /tmp/{{ env_id }} | jq -r '.apocng_ec2.instances[].public_ip' | head -n1`"
+
+
+  - master:
+      layout: main-horizontal
+      panes:
+        -
+          - "docker exec -ti {{ env_id }} /bin/sh"
+          - sleep 5
+          - "ssh -i /tmp/kubespray1_{{ env_id }}  ubuntu@`cat /tmp/{{ env_id }} | jq -r '.apocng_ec2.instances[].public_ip' | head -n1`"
+        -
+          - "docker exec -ti {{ env_id }} /bin/sh"
+          - sleep 5
           - "ssh -i /tmp/kubespray1_{{ env_id }}  ubuntu@`cat /tmp/{{ env_id }} | jq -r '.apocng_ec2.instances[].public_ip' | head -n1`"
 
