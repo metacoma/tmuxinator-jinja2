@@ -1,0 +1,12 @@
+---
+k8s:
+  hosts:
+    node1:
+      ip: 192.168.1.185
+    node2:
+      ip: 192.168.1.187
+    node3:
+      ip: 192.168.1.182
+  vars:
+    ansible_user: ubuntu
+    ansible_ssh_private_key_file: ~/.ssh/homecluster

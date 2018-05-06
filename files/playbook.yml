@@ -1,0 +1,10 @@
+---
+- hosts: localhost
+  gather_facts: false
+  vars:
+    ansible_connection: local
+  tasks:
+    - name: templating
+      template:
+        src: "{{ source }}"
+        dest: "{{ dest }}"

@@ -1,0 +1,23 @@
+# ~/.tmuxinator/contrail.yml
+
+name: contrail-tmuxinator-example
+root: /home/ubuntu
+
+{% set ssh_opts = "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" %}
+
+windows:
+  - nodes:
+      layout: d7ce,134x33,0,0[134x16,0,0,0,134x16,0,17{67x16,0,17,1,66x16,68,17,2}]
+      panes:
+{% for host in groups['k8s'] %}
+{% set node_ip = hostvars[host].ip %}
+{% set node_name = hostvars[host].inventory_hostname %}
+{% if node_name == "node1" %}
+        - ssh -L2224:192.168.1.1:22 {{ ssh_opts }} -i ~/.ssh/homecluster ubuntu@{{ node_ip }}
+{% else %}
+        - ssh {{ ssh_opts }} -i ~/.ssh/homecluster ubuntu@{{ node_ip }}
+{% endif %}
+{% endfor %}
+  - openwrt:
+      panes:
+        - 'while [ : ]; do sshpass -ph0mecluster ssh {{ ssh_opts }} -p2224 root@127.0.0.1; echo "--------------------------"; sleep 5; done'
