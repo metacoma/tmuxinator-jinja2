@@ -1,4 +1,4 @@
-[![asciicast](https://asciinema.org/a/14.png)](https://asciinema.org/a/14)
+[![asciicast](https://asciinema.org/a/W6uz52dy1nT1gy1w1ObE7BDSR.png)](https://asciinema.org/a/W6uz52dy1nT1gy1w1ObE7BDSR)
 ```
 git clone http://github.com/metacoma/tmuxinator-jinja2
 cd tmuxinator-jinja2
